@@ -6,8 +6,8 @@ dist/
 wheels/
 *.egg-info
 
-# My Files
-tester.json
-
 # Virtual environments
 .venv
+
+# My Files
+my_test.json

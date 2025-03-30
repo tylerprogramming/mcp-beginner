@@ -1,0 +1,22 @@
+{
+    "mcpServers": {
+      "filesystem": {
+      "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-filesystem",
+          "/Users/tylerreed/Desktop",
+          "/Users/tylerreed/Downloads"
+        ]
+      },
+      "weather": {
+        "command": "uv",
+        "args": [
+            "--directory",
+            "/Users/tylerreed/_ai-projects/skool-community/weather",
+            "run",
+            "weather.py"
+        ]
+      }
+    }
+  }
