@@ -1,6 +1,6 @@
 # MCP Beginner Project
 
-This repository contains a collection of projects built using the MCP (Model Control Protocol) framework. The main project is a Weather Service that provides weather alerts and forecasts using the National Weather Service API.
+This repository contains a collection of projects built using the MCP (Model Context Protocol) framework. The main project is a Weather Service that provides weather alerts and forecasts using the National Weather Service API.
 
 ## Project Structure
 
@@ -38,7 +38,7 @@ The main application is a weather service that provides two main functionalities
 - **Python Version**: 3.11+
 - **Key Dependencies**:
   - `httpx`: For making async HTTP requests
-  - `mcp`: Model Control Protocol framework for tool integration
+  - `mcp` (1.x, `<2`): Model Context Protocol SDK for tool integration
 
 ### API Endpoints
 
@@ -57,15 +57,24 @@ The main application is a weather service that provides two main functionalities
    ```bash
    cd weather
    ```
-3. Create and activate a virtual environment:
+3. Install dependencies and start the server with [uv](https://docs.astral.sh/uv/) (uses the committed `uv.lock`):
+   ```bash
+   uv run weather.py
+   ```
+   Or with pip in a virtual environment:
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   pip install "httpx>=0.28.1" "mcp[cli]>=1.6.0,<2"
+   python weather.py
    ```
-4. Install dependencies:
-   ```bash
-   pip install -e .
-   ```
+   `pip install -e .` does not work here: the folder has two top-level modules (`hello.py`, `weather.py`) and no build config, so setuptools refuses the flat layout.
+
+> **mcp version:** this code uses `from mcp.server.fastmcp import FastMCP`, which only exists in mcp 1.x. mcp 2.0 renamed it to `MCPServer` (`from mcp.server.mcpserver import MCPServer`), so `pyproject.toml` caps `mcp<2`. See the [v2 migration guide](https://py.sdk.modelcontextprotocol.io/v2/migration/#fastmcp-renamed-to-mcpserver) to port it.
+
+### Claude Desktop
+
+`tester.json` is an example `claude_desktop_config.json`. Replace the `--directory` path (and the filesystem paths) with absolute paths on your machine.
 
 ## Usage
 
